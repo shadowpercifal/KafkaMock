@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ResponseDTO {
-    private Boolean success;
-    public ResponseDTO(Boolean Success){ success = Success;}
+    private String success;
+    public ResponseDTO(Boolean Success){ success = Success?"true":"false";}
 }
