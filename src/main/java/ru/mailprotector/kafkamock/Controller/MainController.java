@@ -42,7 +42,7 @@ public class MainController {
             SendKafkaMessage(request.getMessage());
             final ResponseDTO response = new ResponseDTO(true);
             Log.Info("Request passed and took " + String.valueOf(System.nanoTime() - start) + "nanosec");
-            Log.Debug("========== Response ==========" + response);
+            Log.Debug("========== Response ==========" + response.toString());
             return ResponseEntity.ok(response);
         }
         catch (Exception ex){
