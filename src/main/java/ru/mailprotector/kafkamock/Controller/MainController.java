@@ -1,25 +1,15 @@
 package ru.mailprotector.kafkamock.Controller;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.protocol.types.Field;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.retrytopic.DestinationTopic;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mailprotector.kafkamock.KafkaMockApplication;
 import ru.mailprotector.kafkamock.Logging.Log;
 import ru.mailprotector.kafkamock.Model.RequestDTO;
-import ru.mailprotector.kafkamock.Model.ResponseDTO;
-
-import java.util.Properties;
-import java.util.UUID;
 
 @RestController
 public class MainController {
@@ -40,10 +30,8 @@ public class MainController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Message is empty!");
             }
             SendKafkaMessage(request.getMessage());
-            final ResponseDTO response = new ResponseDTO(true);
             Log.Info("Request passed and took " + String.valueOf(System.nanoTime() - start) + "nanosec");
-            Log.Debug("========== Response ==========" + response.toString());
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok("success");
         }
         catch (Exception ex){
             Log.Error("Request failed! Error:", ex);
