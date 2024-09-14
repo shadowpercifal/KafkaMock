@@ -28,7 +28,7 @@ public class MainController {
     @PostMapping(
             value="send",
             consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.TEXT_PLAIN_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> sendMessage(@RequestBody RequestDTO request){
         try{
@@ -43,7 +43,7 @@ public class MainController {
             final ResponseDTO response = new ResponseDTO(true);
             Log.Info("Request passed and took " + String.valueOf(System.nanoTime() - start) + "nanosec");
             Log.Debug("========== Response ==========" + response);
-            return ResponseEntity.ok("success");
+            return ResponseEntity.ok(response);
         }
         catch (Exception ex){
             Log.Error("Request failed! Error:", ex);
