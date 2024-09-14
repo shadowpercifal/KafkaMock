@@ -13,9 +13,9 @@ import java.util.Properties;
 public class KafkaMockApplication {
 	public static Producer<String, String> producer = null;
 
-	public static void SetupKafka(){
+	public static void SetupKafka(String host){
 		Properties props = new Properties();
-		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, host);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
@@ -24,7 +24,11 @@ public class KafkaMockApplication {
 	}
 
 	public static void main(String[] args) {
-		SetupKafka();
+		if (args.length == 0){
+			System.out.println("No host (in format of 0.0.0.0:00000) specified! Quitting");
+			return;
+		}
+		SetupKafka(args[0]);
 		SpringApplication.run(KafkaMockApplication.class, args);
 	}
 
