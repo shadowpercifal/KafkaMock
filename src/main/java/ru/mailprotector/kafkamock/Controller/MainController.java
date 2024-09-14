@@ -43,7 +43,7 @@ public class MainController {
             final ResponseDTO response = new ResponseDTO(true);
             Log.Info("Request passed and took " + String.valueOf(System.nanoTime() - start) + "nanosec");
             Log.Debug("========== Response ==========" + response);
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok("success");
         }
         catch (Exception ex){
             Log.Error("Request failed! Error:", ex);
